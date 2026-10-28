@@ -39,8 +39,9 @@ button:hover{transform:translateY(-3px) scale(1.03)}
   <div id="intro">
     <div class="cake">💌</div>
     <h1>У тебя есть сюрприз! 💖</h1>
-    <p>Нажми, чтобы открыть своё поздравление 🎁</p>
-    <button class="primary" onclick="revealAll()">Открыть сюрприз ✨</button>
+    <p>До дня рождения осталось: 🎂</p>
+    <div id="countdown" style="font-size:clamp(24px,6vw,38px);font-weight:bold;margin:20px 0;text-shadow:0 3px 12px #a74b8270">Загрузка...</div>
+    <p id="countdownNote">Поздравление откроется автоматически в 00:00 по бакинскому времени ✨</p>
   </div>
   <div id="allContent" style="display:none">
   <div class="cake">🎂</div>
@@ -70,11 +71,34 @@ button:hover{transform:translateY(-3px) scale(1.03)}
 </main>
 <script>
 let hearts=0;
+let countdownTimer;
 function revealAll(){
   document.getElementById('intro').style.display='none';
   document.getElementById('allContent').style.display='block';
   celebrate();
 }
+function updateCountdown(){
+  const target = new Date('2026-10-29T00:00:00+04:00').getTime();
+  const now = Date.now();
+  const left = target - now;
+  if(left <= 0){
+    document.getElementById('countdown').textContent='С ДНЁМ РОЖДЕНИЯ! 🎉';
+    revealAll();
+    clearInterval(countdownTimer);
+    return;
+  }
+  const days=Math.floor(left/86400000);
+  const hours=Math.floor((left%86400000)/3600000);
+  const minutes=Math.floor((left%3600000)/60000);
+  const seconds=Math.floor((left%60000)/1000);
+  document.getElementById('countdown').textContent=
+    (days ? days+' д. ' : '')+
+    String(hours).padStart(2,'0')+' ч. '+
+    String(minutes).padStart(2,'0')+' мин. '+
+    String(seconds).padStart(2,'0')+' сек.';
+}
+countdownTimer=setInterval(updateCountdown,1000);
+updateCountdown();
 function celebrate(){
   const box=document.getElementById('confetti');
   const symbols=['💖','💗','✨','🎉','🌸','🎊'];
