@@ -3,32 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>С днём рождения! 🎂</title>
+<title>С днём рождения! 💖</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;font-family:Arial,sans-serif;color:#fff;background:linear-gradient(135deg,#ff9a9e,#fad0c4,#c9a7ff);overflow-x:hidden}
-.card{width:min(620px,100%);padding:42px 28px;text-align:center;border:1px solid #ffffff80;border-radius:30px;background:#ffffff25;box-shadow:0 20px 60px #6d3b6b30;backdrop-filter:blur(12px);position:relative;z-index:1}
+:root{--pink:#ff6fae;--purple:#9b72ff}
+body{min-height:100vh;font-family:Arial,sans-serif;color:#fff;background:linear-gradient(135deg,#ff9aaf,#c9a7ff,#ffcee5);overflow-x:hidden}
+main{width:min(760px,92%);margin:38px auto;padding:clamp(24px,5vw,48px);text-align:center;border:1px solid #ffffff9c;border-radius:30px;background:#ffffff30;box-shadow:0 20px 60px #7b376b30;backdrop-filter:blur(12px);position:relative;z-index:1}
+h1{font-size:clamp(32px,7vw,55px);margin:12px 0 14px;text-shadow:0 3px 12px #a74b8270}
+h2{font-size:25px;margin:24px 0 14px}
+p{font-size:17px;line-height:1.8}
 .cake{font-size:76px;animation:bounce 2s infinite}
-h1{font-size:clamp(32px,7vw,52px);margin:18px 0 14px;text-shadow:0 3px 12px #a74b8270}
-p{font-size:18px;line-height:1.8;color:#fffafc}
-button{margin-top:26px;padding:14px 24px;border:0;border-radius:999px;background:#fff;color:#b64d86;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 8px 20px #7b376b35;transition:.2s}
-button:hover{transform:translateY(-3px);box-shadow:0 12px 24px #7b376b45}
-#surprise{display:none;margin-top:22px;padding:18px;border-radius:18px;background:#ffffff25;font-size:18px;line-height:1.8}
-.heart{position:fixed;bottom:-40px;font-size:22px;opacity:.7;animation:float 8s linear infinite;pointer-events:none}
+button{padding:13px 19px;margin:7px;border:0;border-radius:999px;background:white;color:#b64d86;font-weight:bold;font-size:15px;cursor:pointer;transition:.2s;box-shadow:0 7px 18px #7b376b25}
+button:hover{transform:translateY(-3px) scale(1.03)}
+.primary{background:#b64d86;color:white}
+.panel{margin-top:22px;padding:20px;border-radius:20px;background:#ffffff26;border:1px solid #ffffff55}
+#surprise,#quizResult{display:none;margin-top:16px;line-height:1.8;font-size:18px}
+.gift{font-size:65px;cursor:pointer;display:inline-block;transition:.3s}
+.gift:hover{transform:rotate(-10deg) scale(1.1)}
+#heartCount{font-size:22px;font-weight:bold}
+.choice{min-width:110px}
+.heart{position:fixed;bottom:-40px;font-size:22px;opacity:.8;animation:float 8s linear infinite;pointer-events:none}
 .heart:nth-child(2){left:12%;animation-delay:1s}.heart:nth-child(3){left:78%;animation-delay:3s}.heart:nth-child(4){left:90%;animation-delay:5s}.heart:nth-child(5){left:30%;animation-delay:2s}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:4;overflow:hidden}
+.piece{position:absolute;top:-20px;font-size:22px;animation:fall 3s linear forwards}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 @keyframes float{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
-@media(max-width:480px){.card{padding:32px 20px}p{font-size:16px}}
+@keyframes fall{to{transform:translateY(110vh) rotate(600deg);opacity:0}}
+@media(max-width:480px){main{margin:18px auto}p{font-size:16px}.panel{padding:15px}}
 </style>
 </head>
 <body>
 <div class="heart">💗</div><div class="heart">💖</div><div class="heart">💕</div><div class="heart">💞</div>
-<main class="card">
+<div id="confetti"></div>
+<main>
   <div class="cake">🎂</div>
   <h1>С днём рождения! 💖</h1>
   <p>Желаю тебе море счастья, крепкого здоровья, искренней любви и исполнения самых заветных желаний! Пусть каждый день приносит радость, улыбки и красивые моменты. Оставайся такой же замечательной, доброй и прекрасной! 🌸</p>
-  <button onclick="document.getElementById('surprise').style.display='block';this.textContent='🎉 Ура! 🎉'">Нажми на сюрприз 💌</button>
-  <div id="surprise">Пусть в жизни будет побольше поводов смеяться, мечтать и радоваться! Ты заслуживаешь всего самого лучшего. С праздником! 🥳🎁✨</div>
+  <button class="primary" onclick="celebrate()">🎉 Устроить праздник!</button>
+  <section class="panel">
+    <h2>🎁 Твой сюрприз</h2>
+    <div class="gift" onclick="openGift()" title="Нажми на подарок">🎁</div>
+    <div id="surprise">Пусть мечты сбываются, рядом будут хорошие люди, а поводов для улыбки становится всё больше! Ты заслуживаешь самого прекрасного! 💝✨</div>
+    <button onclick="openGift()">Открыть подарок</button>
+  </section>
+  <section class="panel">
+    <h2>💗 Собери сердечки</h2>
+    <p>Нажимай на сердечко и собирай праздничные очки!</p>
+    <p id="heartCount">💖 0</p>
+    <button class="primary" onclick="collectHeart()">Нажми на 💖</button>
+  </section>
+  <section class="panel">
+    <h2>🌟 Маленький тест</h2>
+    <p id="question">Что я желаю тебе больше всего?</p>
+    <div id="answers">
+      <button class="choice" onclick="answer(false)">Больше уроков 📚</button>
+      <button class="choice" onclick="answer(true)">Счастья и улыбок 💖</button>
+      <button class="choice" onclick="answer(false)">Ранний подъём ⏰</button>
+    </div>
+    <p id="quizResult"></p>
+  </section>
+  <p style="margin-top:24px">С любовью и самыми тёплыми пожеланиями 💕</p>
 </main>
+<script>
+let hearts=0;
+function celebrate(){
+  const box=document.getElementById('confetti');
+  const symbols=['💖','💗','✨','🎉','🌸','🎊'];
+  for(let i=0;i<55;i++){
+    const el=document.createElement('span');
+    el.className='piece';el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    el.style.left=Math.random()*100+'%';
+    el.style.animationDelay=Math.random()*1.2+'s';
+    el.style.animationDuration=(2+Math.random()*2)+'s';
+    box.appendChild(el);setTimeout(()=>el.remove(),4500);
+  }
+}
+function openGift(){
+  document.getElementById('surprise').style.display='block';
+  celebrate();
+}
+function collectHeart(){
+  hearts++;
+  document.getElementById('heartCount').textContent='💖 '+hearts;
+  if(hearts===5) document.getElementById('heartCount').textContent='💖 '+hearts+' — Супер! Ты собрала 5 сердечек! 🎉';
+}
+function answer(correct){
+  const result=document.getElementById('quizResult');
+  result.style.display='block';
+  result.textContent=correct?'Правильно! 💖 Желаю тебе бесконечного счастья! 🎉':'Попробуй ещё раз 😊 Подсказка: это то, от чего становится тепло на душе!';
+}
+</script>
 </body>
 </html>
