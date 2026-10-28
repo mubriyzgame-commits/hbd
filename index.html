@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>С днём рождения! 🎂</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;font-family:Arial,sans-serif;color:#fff;background:linear-gradient(135deg,#ff9a9e,#fad0c4,#c9a7ff);overflow-x:hidden}
+.card{width:min(620px,100%);padding:42px 28px;text-align:center;border:1px solid #ffffff80;border-radius:30px;background:#ffffff25;box-shadow:0 20px 60px #6d3b6b30;backdrop-filter:blur(12px);position:relative;z-index:1}
+.cake{font-size:76px;animation:bounce 2s infinite}
+h1{font-size:clamp(32px,7vw,52px);margin:18px 0 14px;text-shadow:0 3px 12px #a74b8270}
+p{font-size:18px;line-height:1.8;color:#fffafc}
+button{margin-top:26px;padding:14px 24px;border:0;border-radius:999px;background:#fff;color:#b64d86;font-size:16px;font-weight:bold;cursor:pointer;box-shadow:0 8px 20px #7b376b35;transition:.2s}
+button:hover{transform:translateY(-3px);box-shadow:0 12px 24px #7b376b45}
+#surprise{display:none;margin-top:22px;padding:18px;border-radius:18px;background:#ffffff25;font-size:18px;line-height:1.8}
+.heart{position:fixed;bottom:-40px;font-size:22px;opacity:.7;animation:float 8s linear infinite;pointer-events:none}
+.heart:nth-child(2){left:12%;animation-delay:1s}.heart:nth-child(3){left:78%;animation-delay:3s}.heart:nth-child(4){left:90%;animation-delay:5s}.heart:nth-child(5){left:30%;animation-delay:2s}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes float{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+@media(max-width:480px){.card{padding:32px 20px}p{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="heart">💗</div><div class="heart">💖</div><div class="heart">💕</div><div class="heart">💞</div>
+<main class="card">
+  <div class="cake">🎂</div>
+  <h1>С днём рождения! 💖</h1>
+  <p>Желаю тебе море счастья, крепкого здоровья, искренней любви и исполнения самых заветных желаний! Пусть каждый день приносит радость, улыбки и красивые моменты. Оставайся такой же замечательной, доброй и прекрасной! 🌸</p>
+  <button onclick="document.getElementById('surprise').style.display='block';this.textContent='🎉 Ура! 🎉'">Нажми на сюрприз 💌</button>
+  <div id="surprise">Пусть в жизни будет побольше поводов смеяться, мечтать и радоваться! Ты заслуживаешь всего самого лучшего. С праздником! 🥳🎁✨</div>
+</main>
+</body>
+</html>
