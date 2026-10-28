@@ -53,14 +53,10 @@ button:hover{transform:translateY(-3px) scale(1.03)}
     <button class="primary" onclick="collectHeart()">Нажми на 💖</button>
   </section>
   <section class="panel">
-    <h2>🌟 Маленький тест</h2>
-    <p id="question">Что я желаю тебе больше всего?</p>
-    <div id="answers">
-      <button class="choice" onclick="answer(false)">Больше уроков 📚</button>
-      <button class="choice" onclick="answer(true)">Счастья и улыбок 💖</button>
-      <button class="choice" onclick="answer(false)">Ранний подъём ⏰</button>
-    </div>
-    <p id="quizResult"></p>
+    <h2>🌷 Капсула пожеланий</h2>
+    <p>Нажми на кнопку и получи особое пожелание на этот год!</p>
+    <p id="wish" style="margin:16px 0;font-size:19px">✨ Твоё пожелание уже ждёт тебя...</p>
+    <button class="primary" onclick="newWish()">Открыть пожелание 💌</button>
   </section>
   <p style="margin-top:24px">С любовью и самыми тёплыми пожеланиями 💕</p>
 </main>
@@ -87,10 +83,16 @@ function collectHeart(){
   document.getElementById('heartCount').textContent='💖 '+hearts;
   if(hearts===5) document.getElementById('heartCount').textContent='💖 '+hearts+' — Супер! Ты собрала 5 сердечек! 🎉';
 }
-function answer(correct){
-  const result=document.getElementById('quizResult');
-  result.style.display='block';
-  result.textContent=correct?'Правильно! 💖 Желаю тебе бесконечного счастья! 🎉':'Попробуй ещё раз 😊 Подсказка: это то, от чего становится тепло на душе!';
+function newWish(){
+  const wishes=[
+    'Пусть сбудется мечта, о которой ты давно думаешь! 🌟',
+    'Пусть каждый день приносит повод улыбнуться! 😊',
+    'Пусть рядом всегда будут люди, которые тебя ценят! 💖',
+    'Пусть этот год подарит много ярких приключений! 🎉',
+    'Пусть удача сопровождает тебя во всём! 🍀',
+    'Пусть в твоей жизни будет больше чудес и приятных сюрпризов! 🎁'
+  ];
+  document.getElementById('wish').textContent=wishes[Math.floor(Math.random()*wishes.length)];
 }
 </script>
 </body>
