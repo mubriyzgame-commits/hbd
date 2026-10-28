@@ -77,9 +77,28 @@ function revealAll(){
   document.getElementById('allContent').style.display='block';
   celebrate();
 }
+let trustedNow = null;
+let timeSyncInProgress = false;
+async function syncTrustedTime(){
+  if(timeSyncInProgress) return;
+  timeSyncInProgress = true;
+  try{
+    const response = await fetch('https://gateway.timeapi.world/timezone/Asia/Baku', {cache:'no-store'});
+    if(!response.ok) throw new Error('Time service unavailable');
+    const data = await response.json();
+    trustedNow = data.unixtime * 1000 + (Date.now() - syncStartedAt);
+  }catch(error){
+    // If the time service is temporarily unavailable, keep the countdown running locally.
+  }finally{
+    timeSyncInProgress = false;
+  }
+}
+let syncStartedAt = Date.now();
+syncTrustedTime();
+setInterval(syncTrustedTime, 5 * 60 * 1000);
 function updateCountdown(){
-  const target = new Date(2026, 9, 29, 0, 0, 0).getTime();
-  const now = Date.now();
+  const target = new Date('2026-10-29T00:00:00+04:00').getTime();
+  const now = trustedNow === null ? Date.now() : trustedNow + (Date.now() - syncStartedAt);
   const left = target - now;
   if(left <= 0){
     document.getElementById('countdown').textContent='С ДНЁМ РОЖДЕНИЯ! 🎉';
