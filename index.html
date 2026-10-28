@@ -78,7 +78,7 @@ function revealAll(){
   celebrate();
 }
 function updateCountdown(){
-  const target = new Date('2026-10-29T00:00:00+04:00').getTime();
+  const target = new Date(2026, 9, 29, 0, 0, 0).getTime();
   const now = Date.now();
   const left = target - now;
   if(left <= 0){
