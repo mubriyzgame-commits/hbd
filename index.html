@@ -36,6 +36,13 @@ button:hover{transform:translateY(-3px) scale(1.03)}
 <div class="heart">💗</div><div class="heart">💖</div><div class="heart">💕</div><div class="heart">💞</div>
 <div id="confetti"></div>
 <main>
+  <div id="intro">
+    <div class="cake">💌</div>
+    <h1>У тебя есть сюрприз! 💖</h1>
+    <p>Нажми, чтобы открыть своё поздравление 🎁</p>
+    <button class="primary" onclick="revealAll()">Открыть сюрприз ✨</button>
+  </div>
+  <div id="allContent" style="display:none">
   <div class="cake">🎂</div>
   <h1>С днём рождения! 💖</h1>
   <p>Желаю тебе море счастья, крепкого здоровья, искренней любви и исполнения самых заветных желаний! Пусть каждый день приносит радость, улыбки и красивые моменты. Оставайся такой же замечательной, доброй и прекрасной! 🌸</p>
@@ -59,9 +66,15 @@ button:hover{transform:translateY(-3px) scale(1.03)}
     <button class="primary" onclick="newWish()">Открыть пожелание 💌</button>
   </section>
   <p style="margin-top:24px">С любовью и самыми тёплыми пожеланиями 💕</p>
+  </div>
 </main>
 <script>
 let hearts=0;
+function revealAll(){
+  document.getElementById('intro').style.display='none';
+  document.getElementById('allContent').style.display='block';
+  celebrate();
+}
 function celebrate(){
   const box=document.getElementById('confetti');
   const symbols=['💖','💗','✨','🎉','🌸','🎊'];
