@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>С днём рождения! 💖</title>
+<title>Michael Jackson Birthday Surprise 🎤</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--pink:#ff6fae;--purple:#9b72ff}
-body{min-height:100vh;font-family:Arial,sans-serif;color:#fff;background:linear-gradient(135deg,#ff9aaf,#c9a7ff,#ffcee5);overflow-x:hidden}
-main{width:min(760px,92%);margin:38px auto;padding:clamp(24px,5vw,48px);text-align:center;border:1px solid #ffffff9c;border-radius:30px;background:#ffffff30;box-shadow:0 20px 60px #7b376b30;backdrop-filter:blur(12px);position:relative;z-index:1}
-h1{font-size:clamp(32px,7vw,55px);margin:12px 0 14px;text-shadow:0 3px 12px #a74b8270}
+:root{--pink:#f5c542;--purple:#b38b24}
+body{min-height:100vh;font-family:Arial,sans-serif;color:#fff;background:radial-gradient(ellipse at top,#272727 0%,#090909 70%);overflow-x:hidden}
+main{width:min(760px,92%);margin:38px auto;padding:clamp(24px,5vw,48px);text-align:center;border:1px solid #ffffff9c;border-radius:30px;background:#171717;box-shadow:0 20px 60px #000;backdrop-filter:blur(12px);position:relative;z-index:1}
+h1{font-size:clamp(32px,7vw,55px);margin:12px 0 14px;text-shadow:0 3px 12px #d7b34a80}
 h2{font-size:25px;margin:24px 0 14px}
 p{font-size:17px;line-height:1.8}
 .cake{font-size:76px;animation:bounce 2s infinite}
-button{padding:13px 19px;margin:7px;border:0;border-radius:999px;background:white;color:#b64d86;font-weight:bold;font-size:15px;cursor:pointer;transition:.2s;box-shadow:0 7px 18px #7b376b25}
+button{padding:13px 19px;margin:7px;border:0;border-radius:999px;background:#f5c542;color:#111;font-weight:bold;font-size:15px;cursor:pointer;transition:.2s;box-shadow:0 7px 18px #7b376b25}
 button:hover{transform:translateY(-3px) scale(1.03)}
-.primary{background:#b64d86;color:white}
-.panel{margin-top:22px;padding:20px;border-radius:20px;background:#ffffff26;border:1px solid #ffffff55}
+.primary{background:linear-gradient(135deg,#f5d76e,#b38b24);color:#111}
+.panel{margin-top:22px;padding:20px;border-radius:20px;background:#ffffff0d;border:1px solid #d7b34a66}
 #surprise,#quizResult{display:none;margin-top:16px;line-height:1.8;font-size:18px}
 .gift{font-size:65px;cursor:pointer;display:inline-block;transition:.3s}
 .gift:hover{transform:rotate(-10deg) scale(1.1)}
@@ -37,15 +37,25 @@ button:hover{transform:translateY(-3px) scale(1.03)}
 <div id="confetti"></div>
 <main>
   <div id="intro">
-    <div class="cake">💌</div>
-    <h1>У тебя есть сюрприз! 💖</h1>
+    <div class="cake">🎤</div>
+    <h1>THE KING OF POP 👑</h1>
+    <p>Тебя ждёт особенный сюрприз в стиле Michael Jackson! ✨</p>
     <p>До дня рождения осталось: 🎂</p>
     <div id="countdown" style="font-size:clamp(24px,6vw,38px);font-weight:bold;margin:20px 0;text-shadow:0 3px 12px #a74b8270">Загрузка...</div>
     <p id="countdownNote">Поздравление откроется автоматически в 00:00 по бакинскому времени ✨</p>
   </div>
   <div id="allContent" style="display:none">
-  <div class="cake">🎂</div>
-  <h1>С днём рождения! 💖</h1>
+  <div class="cake">🕺</div>
+  <h1>С днём рождения! 👑</h1>
+  <p style="color:#f5d76e;font-weight:bold">THE KING OF POP • MICHAEL JACKSON 🎤</p>
+  <section class="panel">
+    <h2>🎵 Музыкальный сюрприз</h2>
+    <p>Нажми и включи легендарную Billie Jean!</p>
+    <button class="primary" onclick="playMusic()">▶ Включить музыку</button>
+    <div id="musicPlayer" style="display:none;margin-top:16px">
+      <iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/Zi_XLOBDo_Y?autoplay=1" title="Michael Jackson - Billie Jean Official Video" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="border-radius:14px;max-width:560px"></iframe>
+    </div>
+  </section>
   <p>Желаю тебе море счастья, крепкого здоровья, искренней любви и исполнения самых заветных желаний! Пусть каждый день приносит радость, улыбки и красивые моменты. Оставайся такой же замечательной, доброй и прекрасной! 🌸</p>
   <button class="primary" onclick="celebrate()">🎉 Устроить праздник!</button>
   <section class="panel">
@@ -72,6 +82,9 @@ button:hover{transform:translateY(-3px) scale(1.03)}
 <script>
 let hearts=0;
 let countdownTimer;
+function playMusic(){
+  document.getElementById('musicPlayer').style.display='block';
+}
 function revealAll(){
   document.getElementById('intro').style.display='none';
   document.getElementById('allContent').style.display='block';
